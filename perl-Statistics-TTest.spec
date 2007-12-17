@@ -14,7 +14,6 @@ Source0:	%{real_name}-%{version}.tar.bz2
 BuildRequires:	perl-devel
 BuildRequires:	perl-Statistics-Descriptive >= 2.6
 BuildRequires:	perl-Statistics-Distributions >= 0.7
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 
 %description
 This is the Statistical T-Test module to compare 2 independent
