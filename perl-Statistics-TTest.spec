@@ -1,7 +1,7 @@
 %define real_name Statistics-TTest
 %define	name perl-%{real_name}
 %define	version 1.1.0
-%define	release %mkrel 4
+%define	release %mkrel 5
 
 Summary:	Statistics::TTest - Perl module to perform T-test on 2 independent samples
 Name:		%{name}
