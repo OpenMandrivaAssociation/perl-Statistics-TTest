@@ -1,20 +1,21 @@
-%define real_name Statistics-TTest
-%define	name perl-%{real_name}
-%define	version 1.1.0
-%define	release %mkrel 6
+%define upstream_name    Statistics-TTest
+%define	upstream_version 1.1.0
 
-Summary:	Statistics::TTest - Perl module to perform T-test on 2 independent samples
-Name:		%{name}
-Version:	%{version}
-Release:	%{release}
-License:	GPL or Artistic
+Name:       perl-%{upstream_name}
+Version:    %perl_convert_version %{upstream_version}
+Release:    %mkrel 7
+
+Summary:	Perl module to perform T-test on 2 independent samples
+License:	GPL+ or Artistic
 Group:		Development/Perl
-URL:		http://www.cpan.org
-Source0:	%{real_name}-%{version}.tar.bz2
+Url:		http://search.cpan.org/dist/%{upstream_name}
+Source0:	http://www.cpan.org/modules/by-module/Statistics/%{upstream_name}-%{upstream_version}.tar.bz2
+
 BuildRequires:	perl-devel
-BuildRequires:	perl-Statistics-Descriptive >= 2.6
-BuildRequires:	perl-Statistics-Distributions >= 0.7
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
+BuildRequires:	perl(Statistics::Descriptive)   >= 2.60.0
+BuildRequires:	perl(Statistics::Distributions) >= 0.70.0
+
+BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
 
 %description
 This is the Statistical T-Test module to compare 2 independent
@@ -25,7 +26,7 @@ the null hypothesis is rejected, the difference will be given as the
 lower_clm and upper_clm of the TTest object. 
 
 %prep
-%setup -q -n %{real_name}-%{version} 
+%setup -q -n %{upstream_name}-%{upstream_version}
 
 # perl path hack
 find -type f | xargs perl -pi -e "s|/usr/local/bin/perl|%{_bindir}/perl|g"
@@ -33,7 +34,9 @@ find -type f | xargs perl -pi -e "s|/usr/local/bin/perl|%{_bindir}/perl|g"
 %build
 %{__perl} Makefile.PL INSTALLDIRS=vendor
 %make
-make test
+
+%check
+%make test
 
 %install
 rm -rf %{buildroot}
@@ -46,4 +49,3 @@ rm -rf %{buildroot}
 %defattr(-,root,root)
 %{perl_vendorlib}/Statistics/*.pm
 %{_mandir}/man3/*
-
