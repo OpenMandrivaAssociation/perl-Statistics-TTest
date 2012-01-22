@@ -3,7 +3,7 @@
 
 Name:       perl-%{upstream_name}
 Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 9
+Release:    %mkrel 10
 
 Summary:	Perl module to perform T-test on 2 independent samples
 License:	GPL+ or Artistic
