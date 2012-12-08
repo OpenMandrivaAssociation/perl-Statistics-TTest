@@ -1,9 +1,9 @@
 %define upstream_name    Statistics-TTest
 %define	upstream_version 1.1.0
 
-Name:       perl-%{upstream_name}
-Version:    %perl_convert_version %{upstream_version}
-Release:    %mkrel 10
+Name:		perl-%{upstream_name}
+Version:	%perl_convert_version %{upstream_version}
+Release:	11
 
 Summary:	Perl module to perform T-test on 2 independent samples
 License:	GPL+ or Artistic
@@ -15,7 +15,7 @@ BuildRequires:	perl-devel
 BuildRequires:	perl(Statistics::Descriptive)   >= 2.60.0
 BuildRequires:	perl(Statistics::Distributions) >= 0.70.0
 
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}
+BuildArch:	noarch
 
 %description
 This is the Statistical T-Test module to compare 2 independent
@@ -32,20 +32,64 @@ lower_clm and upper_clm of the TTest object.
 find -type f | xargs perl -pi -e "s|/usr/local/bin/perl|%{_bindir}/perl|g"
 
 %build
-%{__perl} Makefile.PL INSTALLDIRS=vendor
+perl Makefile.PL INSTALLDIRS=vendor
 %make
 
 %check
 %make test
 
 %install
-rm -rf %{buildroot}
 %makeinstall_std
 
-%clean 
-rm -rf %{buildroot}
-
 %files
-%defattr(-,root,root)
 %{perl_vendorlib}/Statistics/*.pm
 %{_mandir}/man3/*
+
+
+%changelog
+* Sun Jan 22 2012 Oden Eriksson <oeriksson@mandriva.com> 1.1.0-10mdv2012.0
++ Revision: 765655
+- rebuilt for perl-5.14.2
+
+* Sat Jan 21 2012 Oden Eriksson <oeriksson@mandriva.com> 1.1.0-9
++ Revision: 764167
+- rebuilt for perl-5.14.x
+
+* Sat May 21 2011 Oden Eriksson <oeriksson@mandriva.com> 1.1.0-8
++ Revision: 676912
+- rebuild
+
+* Fri Feb 12 2010 Jérôme Quelin <jquelin@mandriva.org> 1.1.0-7mdv2011.0
++ Revision: 505027
+- rebuild using %%perl_convert_version
+
+* Fri Sep 04 2009 Thierry Vignaud <tv@mandriva.org> 1.1.0-6mdv2010.0
++ Revision: 430544
+- rebuild
+
+* Thu Jul 31 2008 Thierry Vignaud <tv@mandriva.org> 1.1.0-5mdv2009.0
++ Revision: 258387
+- rebuild
+
+* Thu Jul 24 2008 Thierry Vignaud <tv@mandriva.org> 1.1.0-4mdv2009.0
++ Revision: 246470
+- rebuild
+
+* Fri Dec 21 2007 Olivier Blin <blino@mandriva.org> 1.1.0-2mdv2008.1
++ Revision: 136347
+- restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+
+* Sat Sep 15 2007 Guillaume Rousse <guillomovitch@mandriva.org> 1.1.0-2mdv2008.0
++ Revision: 86920
+- rebuild
+
+
+* Wed Sep 13 2006 Oden Eriksson <oeriksson@mandriva.com> 1.1.0-1mdv2007.0
+- rebuild
+
+* Mon Jul 11 2005 Oden Eriksson <oeriksson@mandriva.com> 1.1.0-1mdk
+- initial Mandriva package
+
